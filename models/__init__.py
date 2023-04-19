@@ -11,4 +11,4 @@ else:
   storage = FileStorage()
   
 # load stored data (if any)
-storage.reload()
+#storage.reload()
