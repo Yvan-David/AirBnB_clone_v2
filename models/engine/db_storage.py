@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """data base storage"""
-from models.base_model import Base
+from models.base_model import BaseModel, Base
 from models.state import State
 from models.city import City
 from models.user import User
@@ -12,6 +12,11 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import (create_engine)
 from sqlalchemy.ext.declarative import declarative_base
 
+classes = {
+    'BaseModel': BaseModel, 'User': User, 'Place': Place,
+    'State': State, 'City': City, 'Amenity': Amenity,
+    'Review': Review
+}
 class DBStorage:
   """a class that represebts the database"""
   __engine = None
@@ -26,3 +31,40 @@ class DBStorage:
                                        pool_pre_ping=True)
     if os.environ.get('HBNB_ENV') == 'test':
       Base.metadata.drop_all(self.__engine)
+  def all(self, cls=None):
+      """ method that returns all objects """
+      objects = {}
+      for classe in classes:
+        if cls is None or cls is classes[classe] or cls is classe:
+            objs = self.__session.query(classes[classe]).all()
+            for obj in objs:
+                key = obj.__class__.__name__ + '.' + obj.id
+                objects[key] = obj
+      return (objects)
+
+  def new(self, obj):
+      """ new method creates new object """
+      self.__session.add(obj)
+
+  def save(self):
+      """ save method saves the object """
+      self.__session.commit()
+
+  def delete(self, obj=None):
+      """ delete method deletes the object """
+      if obj:
+          self.__session.delete(obj)
+          self.save()
+
+  def reload(self):
+      """ reload method creates a session """
+      Base.metadata.create_all(self.__engine)
+      session_factory = sessionmaker(bind=self.__engine,
+                                      expire_on_commit=False)
+      Session = scoped_session(session_factory)
+      self.__session = Session()
+
+  def close(self):
+      """ close method close the session """
+      if self.__session:
+          self.__session.close()
