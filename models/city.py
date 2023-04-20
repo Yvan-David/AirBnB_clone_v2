@@ -8,7 +8,7 @@ class City(BaseModel, Base):
 
     """ The city class, contains state ID and name """
 
-    __table_name__ = 'cities'
+    __tablename__ = 'cities'
 
     if getenv('HBNB_TYPE_STORAGE') == 'db':
         name = Column(String(128), nullable=False)
