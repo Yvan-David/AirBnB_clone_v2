@@ -32,15 +32,15 @@ class DBStorage:
     if os.environ.get('HBNB_ENV') == 'test':
       Base.metadata.drop_all(self.__engine)
   def all(self, cls=None):
-      """ method that returns all objects """
-      objects = {}
-      for classe in classes:
-        if cls is None or cls is classes[classe] or cls is classe:
-            objs = self.__session.query(classes[classe]).all()
-            for obj in objs:
-                key = obj.__class__.__name__ + '.' + obj.id
-                objects[key] = obj
-      return (objects)
+        """ all method """
+        dict_objs = {}
+        for clss in classes:
+            if cls is None or cls is classes[clss] or cls is clss:
+                objs = self.__session.query(classes[clss]).all()
+                for obj in objs:
+                    key = obj.__class__.__name__ + '.' + obj.id
+                    dict_objs[key] = obj
+        return (dict_objs)
 
   def new(self, obj):
       """ new method creates new object """
