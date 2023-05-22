@@ -21,5 +21,5 @@ content="server {
         alias /data/web_static/current/;
     }
 }"
-echo "$content" > /etc/nginx/conf.d/testy.conf
+echo "$content" | sudo tee -a /etc/nginx/conf.d/testy.conf > /dev/null
 sudo service nginx restart
