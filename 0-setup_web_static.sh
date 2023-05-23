@@ -17,9 +17,17 @@ ln -sfn /data/web_static/releases/test/ /data/web_static/current
 chown -R ubuntu /data/
 chgrp -R ubuntu /data/
 content="server {
-    location /current/hbnb_static {
-        alias /data/web_static/current/;
-    }
-}"
-echo "$content" | sudo tee -a /etc/nginx/conf.d/testy.conf > /dev/null
+        listen 80 default_server;
+        listen [::]:80 default_server;
+        root /var/www/html;
+        index index.html index.htm index.nginx-debian.html;
+        server_name _;
+        location / {
+             try_files $uri $uri/ =404;
+        }
+        location /hbnb_static/ {
+            alias /data/web_static/current/;
+        }"
+echo "$content" | sudo tee -a /etc/nginx/sites-available/another > /dev/null
+sudo -sfn /etc/nginx/sites-available/another /etc/nginx/sites-enabled/another
 sudo service nginx restart
