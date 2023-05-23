@@ -7,15 +7,15 @@ sudo ufw allow 'Nginx HTTP'
 sudo chown -R "$USER:$USER" /var/www/html
 echo 'Hello World!' > /var/www/html/index.html
 sudo service nginx start
-mkdir -p /data/
-mkdir -p /data/web_static/
-mkdir -p /data/web_static/releases/
-mkdir -p /data/web_static/shared/
-mkdir -p /data/web_static/releases/test
+sudo mkdir -p /data/
+sudo mkdir -p /data/web_static/
+sudo mkdir -p /data/web_static/releases/
+sudo mkdir -p /data/web_static/shared/
+sudo mkdir -p /data/web_static/releases/test
 echo 'Hello Horlbeton' > /data/web_static/releases/test/index.html
-ln -sfn /data/web_static/releases/test/ /data/web_static/current
-chown -R ubuntu /data/
-chgrp -R ubuntu /data/
+sudo ln -sfn /data/web_static/releases/test/ /data/web_static/current
+sudo chown -R ubuntu /data/
+sudo chgrp -R ubuntu /data/
 content="server {
         listen 80 default_server;
         listen [::]:80 default_server;
