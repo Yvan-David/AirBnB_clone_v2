@@ -28,6 +28,8 @@ content="server {
         location /hbnb_static/ {
             alias /data/web_static/current/;
         }"
-echo "$content" | sudo tee -a /etc/nginx/sites-available/another > /dev/null
-sudo -sfn /etc/nginx/sites-available/another /etc/nginx/sites-enabled/another
+sudo rm -f /etc/nginx/sites-available/default
+echo "$content" | sudo tee -a /etc/nginx/sites-available/default > /dev/null
+
+sudo -sfn /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo service nginx restart
