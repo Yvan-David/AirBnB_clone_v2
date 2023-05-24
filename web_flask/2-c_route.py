@@ -25,12 +25,5 @@ def hello_text(text):
     return f'C {result}'
 
 
-@app.route('/c/<text>', strict_slashes=False)
-def hello_text(text):
-    """prints hello on the web """
-    result = text.replace("_", " ")
-    return f'C {result}'
-
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

@@ -25,6 +25,12 @@ def hello_text(text):
     return f'C {result}'
 
 
+@app.route('/c', strict_slashes=False)
+def hello_pytext():
+    """prints hello on the web """
+    return 'c is cool'
+
+
 @app.route('/python', strict_slashes=False)
 def hello_pytext():
     """prints hello on the web """
