@@ -37,7 +37,7 @@ class DBStorage:
             objs = self.__session.query(State, City,
                                         Place, User, Amenity, Review).all()
         else:
-            objs = self.__session.query(eval(cls))
+            objs = self.__session.query(cls)
         final_dict = {}
         [final_dict.update({
             f"{type(item).__name__}.{item.id}": item
@@ -70,4 +70,3 @@ class DBStorage:
       """ close method close the session """
       if self.__session:
           self.__session.close()
-          
