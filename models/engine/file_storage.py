@@ -60,3 +60,6 @@ class FileStorage:
             return
         if (obj):
             del(obj)
+    def close(self):
+        """ deserializing the JSON file to objects."""
+        self.reload()
