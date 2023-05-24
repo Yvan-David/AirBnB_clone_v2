@@ -1,8 +1,9 @@
 #!/usr/bin/python3
-""" Starting a flask web application
+"""Starting a flask web application.
+The application listens on 0.0.0.0, port 5000.
     /: display Hello HBNB!
-    /hbnb: display HBNB
-    /c/<text>: display C
+    /hbnb: display HBNB.
+    /c/<text>: display C.
 """
 from flask import Flask
 
@@ -12,19 +13,19 @@ app = Flask(__name__)
 
 @app.route('/', strict_slashes=False)
 def hello():
-    """ hello on the web """
+    """hello on the web."""
     return 'Hello HBNB!'
 
 
 @app.route('/hbnb', strict_slashes=False)
 def hello_hbnb():
-    """ prints hbnb  is text on the web Displays """
+    """prints hbnb  is text on the web Displays."""
     return 'HBNB'
 
 
 @app.route('/c/<text>', strict_slashes=False)
 def hello_text(text):
-    """ c is text on the web Displays 'C' followed by the value of <text>. """
+    """c is text on the web Displays 'C' followed by the value of <text>."""
     result = text.replace("_", " ")
     return f'C {result}'
 
