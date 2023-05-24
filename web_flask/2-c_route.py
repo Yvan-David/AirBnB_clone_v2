@@ -14,13 +14,13 @@ def hello():
 
 @app.route('/hbnb', strict_slashes=False)
 def hello_hbnb():
-    """prints hello on the web """
+    """prints hbnb on the web """
     return 'HBNB'
 
 
 @app.route('/c/<text>', strict_slashes=False)
 def hello_text(text):
-    """prints hello on the web """
+    """prints c is text on the web """
     result = text.replace("_", " ")
     return f'C {result}'
 
