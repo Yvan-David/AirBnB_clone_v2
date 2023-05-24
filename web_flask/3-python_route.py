@@ -25,11 +25,17 @@ def hello_text(text):
     return f'C {result}'
 
 
-@app.route('/c/<text>', strict_slashes=False)
-def hello_text(text):
+@app.route('/python', strict_slashes=False)
+def hello_pytext():
+    """prints hello on the web """
+    return f'Python is cool'
+
+
+@app.route('/python/<text>', strict_slashes=False)
+def hello_pythtext(text):
     """prints hello on the web """
     result = text.replace("_", " ")
-    return f'C {result}'
+    return f'Python {result}'
 
 
 if __name__ == '__main__':
