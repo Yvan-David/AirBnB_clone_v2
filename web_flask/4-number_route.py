@@ -48,8 +48,12 @@ def python(text="is cool"):
 
 @app.route("/number/<int:n>", strict_slashes=False)
 def number(n):
-    """prints number on the web.
+    """Displays 'Python' followed by the value of <text>.
+
+    Replaces any underscores in <text> with slashes.
     """
     return f'{n} is a number'
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
