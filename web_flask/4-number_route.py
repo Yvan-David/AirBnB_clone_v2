@@ -1,54 +1,55 @@
 #!/usr/bin/python3
-""" Starting a flask web application """
-from flask import Flask
+"""Starts a Flask web application.
 
+The application listens on 0.0.0.0, port 5000.
+Routes:
+    /: Displays 'Hello HBNB!'.
+    /hbnb: Displays 'HBNB'.
+    /c/<text>: Displays 'C' followed by the value of <text>.
+    /python/(<text>): Displays 'Python' followed by the value of <text>.
+"""
+from flask import Flask
 
 app = Flask(__name__)
 
 
-@app.route('/', strict_slashes=False)
-def hello():
-    """prints hello on the web """
-    return 'Hello HBNB!'
-
-
-@app.route('/hbnb', strict_slashes=False)
+@app.route("/", strict_slashes=False)
 def hello_hbnb():
-    """prints hello on the web """
-    return 'HBNB'
+    """Displays 'Hello HBNB!'."""
+    return "Hello HBNB!"
 
 
-@app.route('/c/<text>', strict_slashes=False)
-def hello_text(text):
-    """prints hello on the web """
-    result = text.replace("_", " ")
-    return f'C {result}'
+@app.route("/hbnb", strict_slashes=False)
+def hbnb():
+    """Displays 'HBNB'."""
+    return "HBNB"
 
 
-@app.route('/c', strict_slashes=False)
-def hello_pytext():
-    """prints hello on the web """
-    return 'c is cool'
+@app.route("/c/<text>", strict_slashes=False)
+def c(text):
+    """Displays 'C' followed by the value of <text>.
+
+    Replaces any underscores in <text> with slashes.
+    """
+    text = text.replace("_", " ")
+    return "C {}".format(text)
 
 
-@app.route('/python', strict_slashes=False)
-def hello_pytext():
-    """prints hello on the web """
-    return f'Python is cool'
+@app.route("/python", strict_slashes=False)
+@app.route("/python/<text>", strict_slashes=False)
+def python(text="is cool"):
+    """Displays 'Python' followed by the value of <text>.
+
+    Replaces any underscores in <text> with slashes.
+    """
+    text = text.replace("_", " ")
+    return "Python {}".format(text)
 
 
-@app.route('/python/<text>', strict_slashes=False)
-def hello_pythtext(text):
-    """prints hello on the web """
-    result = text.replace("_", " ")
-    return f'Python {result}'
-
-
-@app.route('/number/<int:n>', strict_slashes=False)
+@app.route("/number/<int:n>", strict_slashes=False)
 def number(n):
-    """prints hello on the web """
+    """prints number on the web.
+    """
     return f'{n} is a number'
-
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0")
